@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Arvo:700,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+      .container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content:center;
+      }
+      body{
+        background-color:#39404A;
+      }
+      .card:hover {
+        transform: translate3D(0,-1px,0) scale(1.1);
+        color: pink;
+      }
+     .heading-main{
+      text-align: center;
+      color: white;
+     }
+     .card{
+      padding: 20px;
+     }
+    </style>
+  </head>
+  <body>
+    <h5><a href="/">Return Back</a></h5>
+    {% block content %}
+    <h1 class="heading-main">Tweets for : {{key}}</h1>
+    <br>
+    <div class="container">
+      {% if tweets %}
+        {%for i in tweets:%}
+          <a href="{{i['link']}}">
+            <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+              <h5 class="card-title">{{i['username']}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{i['name']}}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{i['hastags']}}</h6>
+              <p class="card-text">{{i['tweet']}}</p>
+              <h8>Replies Count: {{i['replies_count']}}</h8>
+              <h8>Retweets Count: {{i['retweets_count']}}</h8>
+              <h8>Date: {{i['datetime']}}</h8><br>  
+            </div>
+          </a>
+          <br>
+        {%endfor%}
+        {% else %}
+          <h2>Data not found!</h2>
+        {% endif %}
+      {% endblock content %}
+    </div>
+  </body>
+</html>
